@@ -1,0 +1,198 @@
+---
+export async function getStaticPaths() {
+  return [
+    { params: { slug: "pasta-aglio-olio" } },
+    { params: { slug: "scrambled-eggs" } },
+    { params: { slug: "tomato-pasta" } },
+    { params: { slug: "garlic-bread" } }
+  ];
+}
+
+const { slug } = Astro.params;
+
+const recipes: Record<string, { name: string; cuisine: string; type: string; time: string; date: string; ingredients: string[]; instructions: string; images: string[] }> = {
+  "pasta-aglio-olio": {
+    name: "pasta aglio e olio",
+    cuisine: "italian",
+    type: "dinner",
+    time: "20 min",
+    date: "19/01/2025",
+    ingredients: [
+      "400g spaghetti",
+      "6 cloves garlic, thinly sliced",
+      "1/2 cup olive oil",
+      "red pepper flakes",
+      "fresh parsley, chopped",
+      "parmesan cheese"
+    ],
+    instructions: "Boil pasta in salted water until al dente. Meanwhile, heat olive oil in a large pan and add sliced garlic. Cook until golden. Add a splash of pasta water, then the drained pasta. Toss with red pepper flakes, parsley, and parmesan.",
+    images: ["pasta1.jpg", "pasta2.jpg"]
+  },
+  "scrambled-eggs": {
+    name: "scrambled eggs",
+    cuisine: "american",
+    type: "breakfast",
+    time: "5 min", 
+    date: "18/01/2025",
+    ingredients: [
+      "3 large eggs",
+      "2 tbsp butter",
+      "salt to taste",
+      "black pepper"
+    ],
+    instructions: "Whisk eggs with salt and pepper. Melt butter in a non-stick pan over low heat. Add eggs and stir constantly with a spatula until creamy and just set. Remove from heat while still slightly wet.",
+    images: ["eggs1.jpg", "eggs2.jpg"]
+  },
+  "tomato-pasta": {
+    name: "simple tomato pasta",
+    cuisine: "italian",
+    type: "dinner",
+    time: "25 min",
+    date: "17/01/2025",
+    ingredients: [
+      "400g pasta",
+      "1 can crushed tomatoes",
+      "3 cloves garlic",
+      "olive oil",
+      "fresh basil",
+      "salt and pepper"
+    ],
+    instructions: "Cook pasta. Heat oil, add minced garlic, then tomatoes. Simmer 10 minutes. Season with salt and pepper. Toss with pasta and fresh basil.",
+    images: ["tomato1.jpg", "tomato2.jpg"]
+  },
+  "garlic-bread": {
+    name: "garlic bread",
+    cuisine: "italian",
+    type: "side dish",
+    time: "15 min",
+    date: "16/01/2025",
+    ingredients: [
+      "1 baguette",
+      "4 cloves garlic, minced",
+      "1/2 cup butter, softened",
+      "fresh parsley",
+      "salt"
+    ],
+    instructions: "Mix butter with minced garlic, parsley, and salt. Slice baguette, spread mixture on each slice. Wrap in foil and bake at 375°F for 15 minutes.",
+    images: ["bread1.jpg", "bread2.jpg"]
+  }
+};
+
+const recipe = recipes[slug];
+---
+
+<html>
+<head>
+  <title>{recipe.name}</title>
+  <style>
+    body { 
+      font-family: Georgia, serif;
+      max-width: 800px; 
+      margin: 0 auto; 
+      padding: 60px 40px;
+      line-height: 1.8;
+      color: #333;
+      background: #fff;
+    }
+    .back-link {
+      color: #666;
+      text-decoration: underline;
+      margin-bottom: 40px;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+    .back-link:hover {
+      color: #333;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: normal;
+      margin-bottom: 40px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: normal;
+      margin: 30px 0 15px 0;
+      letter-spacing: 0.3px;
+    }
+    .ingredients ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+    .ingredients li {
+      margin: 5px 0;
+    }
+    .instructions p {
+      margin: 15px 0;
+      text-align: justify;
+    }
+    .recipe-meta {
+      margin: 30px 0;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .meta-item {
+      margin: 8px 0;
+    }
+    .recipe-images {
+      display: flex;
+      gap: 10px;
+      margin: 30px 0;
+    }
+    .recipe-image {
+      width: 120px;
+      height: 120px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <a href="/recipes" class="back-link">← back to recipes</a>
+  
+  <h1># {recipe.name}</h1>
+  
+  <div class="recipe-meta">
+    <div class="meta-item">
+      <strong>cuisine:</strong> {recipe.cuisine}
+    </div>
+    <div class="meta-item">
+      <strong>type:</strong> {recipe.type}
+    </div>
+    <div class="meta-item">
+      <strong>time:</strong> {recipe.time}
+    </div>
+    <div class="meta-item">
+      <strong>date added:</strong> {recipe.date}
+    </div>
+  </div>
+
+  <div class="recipe-images">
+    {recipe.images.map((image: string) => (
+      <div class="recipe-image">img: {image}</div>
+    ))}
+  </div>
+  
+  <div class="ingredients">
+    <h3>ingredients</h3>
+    <ul>
+      {recipe.ingredients.map((ingredient: string) => (
+        <li>{ingredient}</li>
+      ))}
+    </ul>
+  </div>
+  
+  <div class="instructions">
+    <h3>instructions</h3>
+    <p>{recipe.instructions}</p>
+  </div>
+</body>
+</html>

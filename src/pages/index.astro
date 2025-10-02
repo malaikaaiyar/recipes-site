@@ -1,0 +1,166 @@
+---
+const recipes = [
+  { 
+    slug: "pasta-aglio-olio", 
+    name: "pasta aglio e olio",
+    cuisine: "italian",
+    type: "dinner",
+    time: "20 min",
+    date: "19/01/2025",
+    images: ["pasta1.jpg", "pasta2.jpg"]
+  },
+  { 
+    slug: "scrambled-eggs", 
+    name: "scrambled eggs",
+    cuisine: "american",
+    type: "breakfast", 
+    time: "5 min",
+    date: "18/01/2025",
+    images: ["eggs1.jpg", "eggs2.jpg"]
+  },
+  { 
+    slug: "tomato-pasta", 
+    name: "simple tomato pasta",
+    cuisine: "italian",
+    type: "dinner",
+    time: "25 min", 
+    date: "17/01/2025",
+    images: ["tomato1.jpg", "tomato2.jpg"]
+  },
+  { 
+    slug: "garlic-bread", 
+    name: "garlic bread",
+    cuisine: "italian",
+    type: "side dish",
+    time: "15 min",
+    date: "16/01/2025",
+    images: ["bread1.jpg", "bread2.jpg"]
+  }
+];
+---
+
+<html>
+<head>
+  <title>My Recipes</title>
+  <style>
+    body { 
+      font-family: Georgia, serif;
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 60px 40px;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+    }
+    h1 { 
+      font-size: 1.5rem;
+      font-weight: normal;
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .subtitle {
+      text-align: center;
+      font-style: italic;
+      color: #666;
+      margin-bottom: 60px;
+      font-size: 0.9rem;
+    }
+    .recipe-list {
+      list-style: none;
+      padding: 0;
+    }
+    .recipe-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+      gap: 20px;
+    }
+    .recipe-item:last-child {
+      border-bottom: none;
+    }
+    .recipe-name {
+      flex: 1;
+      min-width: 300px;
+    }
+    .recipe-name a {
+      text-decoration: none;
+      color: #4a7c59;
+      font-size: 1.8rem;
+      font-weight: normal;
+      line-height: 1.2;
+    }
+    .recipe-name a:hover {
+      text-decoration: underline;
+    }
+    .recipe-name .link-indicator {
+      color: #999;
+      font-size: 0.8rem;
+      margin-left: 8px;
+    }
+    .recipe-meta {
+      flex: 1;
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .recipe-meta .location {
+      font-weight: normal;
+    }
+    .recipe-meta .type {
+      color: #999;
+    }
+    .recipe-meta .time {
+      color: #999;
+    }
+    .recipe-images {
+      display: flex;
+      gap: 4px;
+    }
+    .recipe-image {
+      width: 60px;
+      height: 60px;
+      background: #f0f0f0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #999;
+    }
+    .recipe-date {
+      color: #666;
+      font-size: 0.9rem;
+      min-width: 80px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <h1># My Recipe Collection</h1>
+  <p class="subtitle">simple dishes for everyday cooking</p>
+  
+  <ul class="recipe-list">
+    {recipes.map(recipe => (
+      <li class="recipe-item">
+        <div class="recipe-name">
+          <a href={`/recipes/${recipe.slug}`}>{recipe.name}</a>
+          <span class="link-indicator">( link )</span>
+        </div>
+        <div class="recipe-meta">
+          <div class="location">{recipe.cuisine}, {recipe.type}</div>
+          <div class="type">{recipe.type}</div>
+          <div class="time">{recipe.time}</div>
+        </div>
+        <div class="recipe-images">
+          {recipe.images.map(image => (
+            <div class="recipe-image">img</div>
+          ))}
+        </div>
+        <div class="recipe-date">{recipe.date}</div>
+      </li>
+    ))}
+  </ul>
+</body>
+</html>
