@@ -102,7 +102,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "chapli",
-    name: "green chill chapli kebabs",
+    name: "green chilli chapli kebabs",
     description: "a traditional street food, fragrant minced meat kebabs. 'chaprikh' means flat: these kebabs are pressed flat. usually beef or mutton. i like to use chicken mince, but any minced protein will do!",
     cuisine: "pashtun",
     type: "street food",
