@@ -1,53 +1,17 @@
 ---
-const recipes = [
-  { 
-    slug: "pasta-aglio-olio", 
-    name: "pasta aglio e olio",
-    cuisine: "italian",
-    type: "dinner",
-    time: "20 min",
-    date: "19/01/2025",
-    images: ["pasta1.jpg", "pasta2.jpg"]
-  },
-  { 
-    slug: "scrambled-eggs", 
-    name: "scrambled eggs",
-    cuisine: "american",
-    type: "breakfast", 
-    time: "5 min",
-    date: "18/01/2025",
-    images: ["eggs1.jpg", "eggs2.jpg"]
-  },
-  { 
-    slug: "tomato-pasta", 
-    name: "simple tomato pasta",
-    cuisine: "italian",
-    type: "dinner",
-    time: "25 min", 
-    date: "17/01/2025",
-    images: ["tomato1.jpg", "tomato2.jpg"]
-  },
-  { 
-    slug: "garlic-bread", 
-    name: "garlic bread",
-    cuisine: "italian",
-    type: "side dish",
-    time: "15 min",
-    date: "16/01/2025",
-    images: ["bread1.jpg", "bread2.jpg"]
-  }
-];
+import { recipes } from '../data/recipes.ts';
 ---
 
 <html>
 <head>
-  <title>My Recipes</title>
+  <title>malaika's cookbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { 
       font-family: Georgia, serif;
       max-width: 1200px; 
       margin: 0 auto; 
-      padding: 60px 40px;
+      padding: 60px 20px;
       line-height: 1.6;
       color: #333;
       background: #fff;
@@ -82,24 +46,20 @@ const recipes = [
     }
     .recipe-name {
       flex: 1;
-      min-width: 300px;
     }
     .recipe-name a {
+      transition: filter 0.3s ease;
       text-decoration: none;
       color: #4a7c59;
-      font-size: 1.8rem;
       font-weight: normal;
       line-height: 1.2;
+      font-size: 2rem;
     }
     .recipe-name a:hover {
-      text-decoration: underline;
-    }
-    .recipe-name .link-indicator {
-      color: #999;
-      font-size: 0.8rem;
-      margin-left: 8px;
+      filter: blur(2px);
     }
     .recipe-meta {
+      margin-left: 20px;
       flex: 1;
       color: #666;
       font-size: 0.9rem;
@@ -111,14 +71,14 @@ const recipes = [
     .recipe-meta .type {
       color: #999;
     }
-    .recipe-meta .time {
-      color: #999;
-    }
     .recipe-images {
+      width: 124px;
+      min-width: 124px;
       display: flex;
       gap: 4px;
     }
-    .recipe-image {
+    .recipe-image img{
+      transition: transform 0.2s ease;
       width: 60px;
       height: 60px;
       background: #f0f0f0;
@@ -135,32 +95,152 @@ const recipes = [
       min-width: 80px;
       text-align: right;
     }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .modal img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    /* Tablet styles */
+    @media (max-width: 768px) {
+      body {
+        padding: 40px 15px;
+      }
+      .recipe-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 20px 0;
+      }
+      .recipe-name {
+        min-width: auto;
+        width: 100%;
+      }
+      .recipe-name a {
+        font-size: 1.5rem;
+      }
+      .recipe-meta {
+        margin-left: 0;
+        width: 100%;
+      }
+      .recipe-images {
+        width: 100%;
+        min-width: auto;
+        justify-content: flex-start;
+      }
+      .recipe-date {
+        min-width: auto;
+        text-align: left;
+        width: 100%;
+      }
+    }
+
+    /* Mobile styles */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 10px;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 40px;
+      }
+      .recipe-name a {
+        font-size: 1.2rem;
+      }
+      .recipe-meta {
+        font-size: 0.8rem;
+      }
+      .recipe-image {
+        width: 50px;
+        height: 50px;
+        font-size: 0.6rem;
+      }
+      .modal-content {
+        padding: 15px;
+        max-width: 95%;
+        max-height: 95%;
+      }
+    }
+
+    /* Large desktop styles */
+    @media (min-width: 1400px) {
+      body {
+        max-width: 1400px;
+        padding: 80px 40px;
+      }
+      .recipe-name a {
+        font-size: 2.2rem;
+      }
+      .recipe-meta {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1># My Recipe Collection</h1>
-  <p class="subtitle">simple dishes for everyday cooking</p>
+  <h1># malaika's cookbook</h1>
+  <p class="subtitle">for mom and dad, who have been taking food to the next level my whole life. <br> these recipes range from experiments in our home to food that i had somewhere else that changed my life. all keto, mostly veggie, and always tasty.</p>
   
   <ul class="recipe-list">
     {recipes.map(recipe => (
       <li class="recipe-item">
         <div class="recipe-name">
           <a href={`/recipes/${recipe.slug}`}>{recipe.name}</a>
-          <span class="link-indicator">( link )</span>
         </div>
         <div class="recipe-meta">
-          <div class="location">{recipe.cuisine}, {recipe.type}</div>
+          <div class="location">{recipe.cuisine}</div>
           <div class="type">{recipe.type}</div>
-          <div class="time">{recipe.time}</div>
         </div>
         <div class="recipe-images">
           {recipe.images.map(image => (
-            <div class="recipe-image">img</div>
+            <div class="recipe-image" data-image={image}><img src={image} /></div>
           ))}
         </div>
         <div class="recipe-date">{recipe.date}</div>
       </li>
     ))}
   </ul>
+
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="">
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+
+    document.querySelectorAll(".recipe-image").forEach(img => {
+      img.addEventListener("mouseenter", function() {
+        modal.style.display = "block";
+        modalImg.src = this.getAttribute("data-image");
+      });
+
+      img.addEventListener("mouseleave", function() {
+        modal.style.display = "none";
+      });
+    });
+  </script>
 </body>
 </html>
