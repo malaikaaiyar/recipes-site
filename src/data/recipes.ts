@@ -119,6 +119,24 @@ export const recipes: Recipe[] = [
     ],
     instructions: "Finely chop the green chilli, garlic, ginger, coriander. Mix all the ingredients, except the onions, in a bowl. In a hot flat pan with oil, make 'chapli' shaped kebabs by scooping the mince onto the pan and spreading it out flat. Cook on both sides until browned / 74°C. Serve with sliced raw onion on the side.",
     images: []
+  },
+  {
+    slug: "egg",
+    name: "sweet and spicy garlic chilli yoghurt eggs",
+    description: "inspired by the Turkish çilbir but with my own twists. decidded to put this on here after faye really enjoyed it.",
+    cuisine: "turkish?",
+    type: "brunch",
+    date: "2/11/2025",
+    ingredients: [
+      "2 eggs",
+      "fage 5% greek yoghurt",
+      "garlic, minced",
+      "spring onion, thinly sliced",
+      "chilli flakes, I like to use gochugaru",
+      "chilli jam, my favourite brand is Tracklements",
+      "oil for frying eggs and to make a chilli oil"
+    ],
+    instructions: "Spread a thick layer of Greek yoghurt on a plate. Fry up two eggs, sunny side up, quickly (poached is also nice here). Place the eggs on the yoghurt. In the same pan, in 2-3 tbsp of oil, fry the garlic, spring onion whites, and chilli flakes until fragrant. Pour over the eggs. Top with spring onion greens and a few dollops of chilli jam and serve immediately.
   }
 ];
 
