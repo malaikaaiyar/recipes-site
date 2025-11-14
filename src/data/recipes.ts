@@ -123,7 +123,7 @@ export const recipes: Recipe[] = [
   {
     slug: "egg",
     name: "garlic chilli yoghurt eggs",
-    description: "inspired by the Turkish çilbir but with my own twists. decidded to put this on here after faye really enjoyed it.",
+    description: "inspired by the Turkish çilbir but with my own twists. decided to put this on here after faye really enjoyed it.",
     cuisine: "turkish",
     type: "brunch",
     date: "2/11/2025",
